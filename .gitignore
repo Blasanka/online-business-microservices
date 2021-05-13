@@ -1,0 +1,14 @@
+AuthService/.idea
+OrderService/.idea
+PaymentService/.idea
+UserService/.idea
+
+AuthService/.mvn
+OrderService/.mvn
+PaymentService/.mvn
+UserService/.mvn
+
+AuthService/target
+OrderService/target
+PaymentService/target
+UserService/target
