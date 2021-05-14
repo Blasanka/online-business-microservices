@@ -78,15 +78,45 @@ public class PaymentService {
         return (accessToken.contains("Bearer ") && accessToken.length() >= 12 && accessToken.split("\\.").length == 3);
     }
 
-    public GeneralResponse<List<PaymentResponse>> checkPaymentHistory(
+    public GeneralResponse<PaymentResponse> checkPaymentHistory(
             CheckPaymentRequest checkPaymentRequest, String accessToken) {
 
         if (validateAccessToken(accessToken) && validateCheckPaymentRequest(checkPaymentRequest)) {
             try {
-                List<Payment> payments = paymentRepository.findPaymentHistory(
+                Payment payments = paymentRepository.findPaymentHistory(
                         checkPaymentRequest.getUserId(),
                         checkPaymentRequest.getOrderId()
                 );
+                GeneralResponse<PaymentResponse> generalResponse = new GeneralResponse<>(
+                        HttpStatus.OK.value(),
+                        null,
+                        new PaymentResponse(payments.getId(), payments.getPaymentReference(),
+                            payments.getPaymentMadeAt(), payments.getUserId(),
+                            payments.getOrderId(), payments.getTotalPrice())
+                );
+                return generalResponse;
+            } catch (Exception e) {
+                Logger.getLogger("info").log(Level.SEVERE, e.getMessage());
+                return new GeneralResponse<>(
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        "Processing failed, Cannot fetch payment history!",
+                        null
+                );
+            }
+        }
+        return new GeneralResponse<>(
+            HttpStatus.UNAUTHORIZED.value(),
+            "Unauthorized, failed to process request",
+            null
+        );
+    }
+
+    public GeneralResponse<List<PaymentResponse>> checkPaymentHistoryByUserId(
+            Long userId, String accessToken) {
+
+        if (validateAccessToken(accessToken)) {
+            try {
+                List<Payment> payments = paymentRepository.findByUserId(userId);
                 GeneralResponse<List<PaymentResponse>> generalResponse = new GeneralResponse<>(
                         HttpStatus.OK.value(),
                         null,
@@ -105,9 +135,9 @@ public class PaymentService {
             }
         }
         return new GeneralResponse<>(
-            HttpStatus.UNAUTHORIZED.value(),
-            "Unauthorized, failed to process request",
-            null
+                HttpStatus.UNAUTHORIZED.value(),
+                "Unauthorized, failed to process request",
+                null
         );
     }
 

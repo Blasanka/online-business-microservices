@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/payments")
 public class PaymentController {
 
     @Autowired
@@ -29,11 +29,22 @@ public class PaymentController {
         return new ResponseEntity<>(generalResponse, HttpStatus.resolve(generalResponse.getStatus()));
     }
 
+    @GetMapping(produces = "application/json", path = "/{userId}", headers = "accessToken")
+    public ResponseEntity<GeneralResponse<List<PaymentResponse>>> checkPaymentHistoryByUserId(@PathVariable Long userId,
+                                                                                              @RequestHeader String accessToken) {
+
+        GeneralResponse<List<PaymentResponse>> generalResponse = paymentService.checkPaymentHistoryByUserId(
+                userId, accessToken);
+
+        return new ResponseEntity<>(generalResponse, HttpStatus.resolve(generalResponse.getStatus()));
+    }
+
     @PostMapping(produces = "application/json", consumes = "application/json", path = "/history", headers = "accessToken")
-    public ResponseEntity<GeneralResponse<List<PaymentResponse>>> checkPaymentHistory(
+    public ResponseEntity<GeneralResponse<PaymentResponse>> checkPaymentHistory(
             @RequestBody CheckPaymentRequest checkPaymentRequest, @RequestHeader String accessToken) {
 
-        GeneralResponse<List<PaymentResponse>> generalResponse = paymentService.checkPaymentHistory(
+
+        GeneralResponse<PaymentResponse> generalResponse = paymentService.checkPaymentHistory(
                 checkPaymentRequest, accessToken);
 
         return new ResponseEntity<>(generalResponse, HttpStatus.resolve(generalResponse.getStatus()));

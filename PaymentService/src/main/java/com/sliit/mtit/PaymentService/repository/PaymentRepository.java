@@ -12,8 +12,11 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     @Query(value = "SELECT * FROM payment WHERE user_id = :userId AND order_id = :orderId", nativeQuery = true)
-    public List<Payment> findPaymentHistory(Long userId, Long orderId);
+    public Payment findPaymentHistory(Long userId, Long orderId);
 
     @Query(value = "SELECT * FROM payment WHERE payment_reference = :paymentReference", nativeQuery = true)
     public List<Payment> findPaymentHistoryWithRef(String paymentReference);
+
+    @Query(value = "SELECT * FROM payment WHERE user_id = :userId", nativeQuery = true)
+    List<Payment> findByUserId(Long userId);
 }
