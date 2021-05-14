@@ -1,19 +1,24 @@
 package com.sliit.mtit.AuthService.dto;
 
-public class UserResponse {
+public class UserRequest {
 
-    private Long id;
     private String email;
+    private String password;
     private String username;
     private String dob;
     private String nic;
 
-    public UserResponse() {
+    public UserRequest() {
     }
 
-    public UserResponse(Long id, String email, String username, String dob, String nic) {
-        this.id = id;
+    public UserRequest(String email, String password) {
         this.email = email;
+        this.password = password;
+    }
+
+    public UserRequest(String email, String password, String username, String dob, String nic) {
+        this.email = email;
+        this.password = password;
         this.username = username;
         this.dob = dob;
         this.nic = nic;
@@ -25,6 +30,14 @@ public class UserResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {
@@ -51,20 +64,12 @@ public class UserResponse {
         this.nic = nic;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-        return "UserResponse{" +
-                "id:" + id +
-                ", email:'" + email + '\'' +
+        return "SignUpRequest{" +
+                "email:'" + email + '\'' +
                 ", username:'" + username + '\'' +
+                ", password:'" + password + '\'' +
                 ", dob:'" + dob + '\'' +
                 ", nic:'" + nic + '\'' +
                 '}';

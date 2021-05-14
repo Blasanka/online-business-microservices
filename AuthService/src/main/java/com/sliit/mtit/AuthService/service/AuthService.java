@@ -1,8 +1,10 @@
 package com.sliit.mtit.AuthService.service;
 
+import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sliit.mtit.AuthService.dto.*;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -15,6 +17,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class AuthService {
@@ -31,8 +35,6 @@ public class AuthService {
                         loginRequest,
                         UserResponse.class);
 
-                System.out.println(entity.getBody());
-
                 if (entity == null || entity.getBody() == null)
                     return new GeneralResponse<>(
                             HttpStatus.UNAUTHORIZED.value(),
@@ -41,7 +43,7 @@ public class AuthService {
                     );
 
                 return new GeneralResponse<>(
-                        HttpStatus.UNAUTHORIZED.value(),
+                        entity.getStatusCode().value(),
                         "User authenticated successfully!",
                         new AuthResponse(
                                 entity.getBody().getId(),
@@ -61,7 +63,7 @@ public class AuthService {
                 );
             } catch (Exception e) {
                 return new GeneralResponse<>(
-                        HttpStatus.UNAUTHORIZED.value(),
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(),
                         "Login failed, please try again!",
                         null
                 );
@@ -75,36 +77,34 @@ public class AuthService {
         );
     }
 
-    public GeneralResponse signUp(SignUpRequest signUpRequest) {
+    public GeneralResponse signUp(UserRequest signUpRequest) {
         if (validateSignUp(signUpRequest)) {
-
             try {
-                // To avoid manually mapping to SignUpRequest to LinkedMultiValueMap, I used below method
-                ObjectMapper objectMapper = new ObjectMapper();
-                Map<String, String> map = objectMapper.convertValue(signUpRequest, new TypeReference<>() {});
-
-                MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-                map.entrySet().forEach(e -> body.add(e.getKey(), e.getValue()));
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-                headers.setContentType(MediaType.APPLICATION_JSON);
-
-                HttpEntity<?> httpEntity = new HttpEntity<>(body, headers);
-
-                GeneralResponse<UserResponse> generalResponse = restTemplate.exchange(
+                var entity = restTemplate.postForEntity(
                         "http://localhost:8080/api/v1/users/",
-                        HttpMethod.POST,
-                        httpEntity,
-                        new ParameterizedTypeReference<GeneralResponse<UserResponse>>() {
-                        }).getBody();
+                        signUpRequest,
+                        GeneralResponse.class);
+
+                if (entity == null || entity.getBody() == null)
+                    return new GeneralResponse<>(
+                            HttpStatus.BAD_REQUEST.value(),
+                            "Registration unsuccessful, please try again!",
+                            null
+                    );
 
                 return new GeneralResponse<>(
-                        HttpStatus.BAD_REQUEST.value(),
+                        entity.getStatusCode().value(),
                         "User sing up successful!",
-                        generalResponse.getBody()
+                        entity.getBody().getBody()
+                );
+            } catch (HttpClientErrorException e) {
+                return new GeneralResponse<>(
+                        e.getStatusCode().value(),
+                        e.getResponseBodyAsString(),
+                        null
                 );
             } catch (Exception e) {
+                Logger.getLogger("Error").log(Level.SEVERE, e.getMessage());
                 return new GeneralResponse<>(
                         HttpStatus.INTERNAL_SERVER_ERROR.value(),
                         "Something went wrong, sign up failed!",
@@ -120,7 +120,7 @@ public class AuthService {
         );
     }
 
-    private boolean validateSignUp(SignUpRequest signUpRequest) {
+    private boolean validateSignUp(UserRequest signUpRequest) {
         return signUpRequest.getEmail() != null && signUpRequest.getEmail() != ""
                 && signUpRequest.getEmail() != null && signUpRequest.getEmail() != ""
                 && signUpRequest.getPassword() != null && signUpRequest.getPassword() != "";
@@ -130,5 +130,29 @@ public class AuthService {
         return loginRequest.getEmail() != null && loginRequest.getEmail() != ""
                 && loginRequest.getPassword() != null && loginRequest.getPassword() != "";
     }
+
+
+//    private GeneralResponse<UserResponse> createUserFromUsersMicroService(SignUpRequest signUpRequest) {
+//        // To avoid manually mapping to SignUpRequest to LinkedMultiValueMap, I used below method
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Map<String, String> map = objectMapper.convertValue(signUpRequest, new TypeReference<>() {});
+//
+//        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+//        map.entrySet().forEach(e -> body.add(e.getKey(), e.getValue()));
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//        HttpEntity<?> httpEntity = new HttpEntity<>(body, headers);
+//
+//        GeneralResponse<UserResponse> generalResponse = restTemplate.exchange(
+//                "http://localhost:8080/api/v1/users/",
+//                HttpMethod.POST,
+//                httpEntity,
+//                new ParameterizedTypeReference<GeneralResponse<UserResponse>>() {
+//                }).getBody();
+//        return generalResponse;
+//    }
 
 }

@@ -3,7 +3,7 @@ package com.sliit.mtit.AuthService.controller;
 import com.sliit.mtit.AuthService.dto.GeneralResponse;
 import com.sliit.mtit.AuthService.dto.LoginRequest;
 import com.sliit.mtit.AuthService.dto.AuthResponse;
-import com.sliit.mtit.AuthService.dto.SignUpRequest;
+import com.sliit.mtit.AuthService.dto.UserRequest;
 import com.sliit.mtit.AuthService.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,13 +32,13 @@ public class AuthController {
     }
 
     @PostMapping(produces = "application/json", consumes = "application/json", path="register")
-    public ResponseEntity<GeneralResponse<AuthResponse>> signup(@RequestBody SignUpRequest signUpRequest) {
+    public ResponseEntity<GeneralResponse<AuthResponse>> signup(@RequestBody UserRequest signUpRequest) {
 
         GeneralResponse generalResponse = authService.signUp(signUpRequest);
 
         return new ResponseEntity<GeneralResponse<AuthResponse>>(
-                generalResponse,
-                HttpStatus.resolve(generalResponse.getStatus())
+            generalResponse,
+            HttpStatus.resolve(generalResponse.getStatus())
         );
     }
 

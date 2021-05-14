@@ -21,8 +21,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<GeneralResponse<User>> createUser(@RequestBody UserRequest orderRequest) {
-        GeneralResponse<User> response = userService.createUser(orderRequest);
+    public ResponseEntity<GeneralResponse<UserResponse>> createUser(@RequestBody UserRequest userRequest) {
+        GeneralResponse<UserResponse> response = userService.createUser(userRequest);
         return new ResponseEntity<>(response, HttpStatus.resolve(response.getStatus()));
     }
 

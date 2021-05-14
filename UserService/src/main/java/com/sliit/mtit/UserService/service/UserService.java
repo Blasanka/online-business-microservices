@@ -6,9 +6,12 @@ import com.sliit.mtit.UserService.dto.UserResponse;
 import com.sliit.mtit.UserService.entity.User;
 import com.sliit.mtit.UserService.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -27,7 +30,7 @@ public class UserService {
                 || request.getPassword() == null || request.getPassword() == "";
     }
 
-    public GeneralResponse createUser(UserRequest userRequest) {
+    public GeneralResponse<UserResponse> createUser(UserRequest userRequest) {
 
         if (validateUserRequest(userRequest)) {
             return new GeneralResponse(
@@ -38,9 +41,9 @@ public class UserService {
         }
 
         User newUser = new User(
-            userRequest.getEmail(),
-            userRequest.getPassword(),
             userRequest.getUsername(),
+            userRequest.getPassword(),
+            userRequest.getEmail(),
             userRequest.getDob(),
             userRequest.getNic()
         );
@@ -52,6 +55,13 @@ public class UserService {
                     "Successfully created new user",
                     new UserResponse(user.getId(), user.getEmail(),
                             user.getUsername(), user.getDob(), user.getNic())
+            );
+        } catch (DataIntegrityViolationException e) {
+            // Haven't properly handle json error responses with spring boot capabilities for the time being
+            return new GeneralResponse<>(
+                    HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(),
+                    null
             );
         } catch (Exception e) {
             return new GeneralResponse(
@@ -148,8 +158,8 @@ public class UserService {
             Optional<User> user = userRepository.findUserByCredentials(email, password);
             if (!user.isEmpty()) {
                 return new GeneralResponse(
-                    HttpStatus.NO_CONTENT.value(),
-                    "Successfully deleted user",
+                    HttpStatus.OK.value(),
+                    "User logged in successfully",
                     new UserResponse(user.get().getId(), user.get().getEmail(),
                             user.get().getUsername(), user.get().getDob(), user.get().getNic())
                 );

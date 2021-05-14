@@ -38,4 +38,13 @@ public class GeneralResponse<T> {
     public void setBody(T body) {
         this.body = body;
     }
+
+    @Override
+    public String toString() {
+        return "GeneralResponse {" +
+                "status:" + status +
+                ", message:'" + message + '\'' +
+                ", body:" + body.toString() +
+                '}';
+    }
 }
