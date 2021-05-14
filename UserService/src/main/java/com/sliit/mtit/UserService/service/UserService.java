@@ -174,7 +174,7 @@ public class UserService {
             Logger.getLogger("info").log(Level.SEVERE, e.getMessage());
             return new GeneralResponse(
                     HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "Failed! cannot delete user",
+                    "Failed! cannot fetch user",
                     null
             );
         }

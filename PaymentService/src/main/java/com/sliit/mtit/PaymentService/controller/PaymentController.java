@@ -30,9 +30,8 @@ public class PaymentController {
     }
 
     @GetMapping(produces = "application/json", path = "/{userId}", headers = "accessToken")
-    public ResponseEntity<GeneralResponse<List<PaymentResponse>>> checkPaymentHistoryByUserId(@PathVariable Long userId,
-                                                                                              @RequestHeader String accessToken) {
-
+    public ResponseEntity<GeneralResponse<List<PaymentResponse>>> checkPaymentHistoryByUserId(
+            @PathVariable Long userId, @RequestHeader String accessToken) {
         GeneralResponse<List<PaymentResponse>> generalResponse = paymentService.checkPaymentHistoryByUserId(
                 userId, accessToken);
 

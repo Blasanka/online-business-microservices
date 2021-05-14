@@ -21,7 +21,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<GeneralResponse<UserResponse>> createUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<GeneralResponse<UserResponse>> createUser(
+            @RequestBody UserRequest userRequest) {
         GeneralResponse<UserResponse> response = userService.createUser(userRequest);
         return new ResponseEntity<>(response, HttpStatus.resolve(response.getStatus()));
     }
@@ -46,7 +47,8 @@ public class UserController {
     }
 
     @PutMapping(produces = "application/json", path="/{userId}")
-    public ResponseEntity<GeneralResponse<?>> updateUser(@PathVariable Long userId, @RequestBody UserRequest userRequest) {
+    public ResponseEntity<GeneralResponse<?>> updateUser(
+            @PathVariable Long userId, @RequestBody UserRequest userRequest) {
         GeneralResponse<User> response = userService.updateUser(userId, userRequest);
         return new ResponseEntity<>(response, HttpStatus.resolve(response.getStatus()));
     }

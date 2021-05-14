@@ -131,6 +131,11 @@ public class AuthService {
                 && loginRequest.getPassword() != null && loginRequest.getPassword() != "";
     }
 
+    public boolean validateAccessToken(String accessToken) {
+        // Dummy validation to prove that validation is here,
+        // jsonwebtoken can be use to jwt management
+        return (accessToken.contains("Bearer ") && accessToken.length() >= 12 && accessToken.split("\\.").length == 3);
+    }
 
 //    private GeneralResponse<UserResponse> createUserFromUsersMicroService(SignUpRequest signUpRequest) {
 //        // To avoid manually mapping to SignUpRequest to LinkedMultiValueMap, I used below method

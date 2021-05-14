@@ -7,8 +7,13 @@ import com.sliit.mtit.PaymentService.dto.PaymentResponse;
 import com.sliit.mtit.PaymentService.entity.Payment;
 import com.sliit.mtit.PaymentService.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
@@ -21,12 +26,14 @@ public class PaymentService {
 
     @Autowired
     PaymentRepository paymentRepository;
+    @Autowired
+    private RestTemplate restTemplate;
 
     // Here goes third part payment integration like Stripe or Paypal or whatever
     public GeneralResponse<PaymentResponse> makePayment(
             MakePaymentRequest paymentRequest, String accessToken) {
 
-        if (validateAccessToken(accessToken) && validateMakePaymentRequest(paymentRequest)) {
+        if (checkAuthorization(accessToken) && validateMakePaymentRequest(paymentRequest)) {
 
             // Here should handle third party payment integration
 
@@ -72,16 +79,10 @@ public class PaymentService {
             && paymentRequest.getOrderPrice() != null && paymentRequest.getOrderPrice() != 0;
     }
 
-    private boolean validateAccessToken(String accessToken) {
-        // Dummy validation to prove that validation is here,
-        // jsonwebtoken can be use to jwt management
-        return (accessToken.contains("Bearer ") && accessToken.length() >= 12 && accessToken.split("\\.").length == 3);
-    }
-
     public GeneralResponse<PaymentResponse> checkPaymentHistory(
             CheckPaymentRequest checkPaymentRequest, String accessToken) {
 
-        if (validateAccessToken(accessToken) && validateCheckPaymentRequest(checkPaymentRequest)) {
+        if (checkAuthorization(accessToken) && validateCheckPaymentRequest(checkPaymentRequest)) {
             try {
                 Payment payments = paymentRepository.findPaymentHistory(
                         checkPaymentRequest.getUserId(),
@@ -111,10 +112,24 @@ public class PaymentService {
         );
     }
 
+    private boolean checkAuthorization(String accessToken) {
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("Content-Type", "application/json");
+        headers.add("accessToken", accessToken);
+
+        var response = restTemplate.exchange(
+            "http://localhost:8083/api/v1/auth",
+            HttpMethod.GET,
+            new HttpEntity<>(headers),
+            Object.class
+        );
+        return response.getStatusCode() == HttpStatus.OK;
+    }
+
     public GeneralResponse<List<PaymentResponse>> checkPaymentHistoryByUserId(
             Long userId, String accessToken) {
 
-        if (validateAccessToken(accessToken)) {
+        if (checkAuthorization(accessToken)) {
             try {
                 List<Payment> payments = paymentRepository.findByUserId(userId);
                 GeneralResponse<List<PaymentResponse>> generalResponse = new GeneralResponse<>(
