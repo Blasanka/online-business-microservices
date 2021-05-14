@@ -29,7 +29,7 @@ public class PaymentController {
         return new ResponseEntity<>(generalResponse, HttpStatus.resolve(generalResponse.getStatus()));
     }
 
-    @PostMapping(produces = "application/json", consumes = "application/json", headers = "accessToken")
+    @PostMapping(produces = "application/json", consumes = "application/json", path = "/history", headers = "accessToken")
     public ResponseEntity<GeneralResponse<List<PaymentResponse>>> checkPaymentHistory(
             @RequestBody CheckPaymentRequest checkPaymentRequest, @RequestHeader String accessToken) {
 
