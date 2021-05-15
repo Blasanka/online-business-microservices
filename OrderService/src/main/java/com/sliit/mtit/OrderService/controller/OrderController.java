@@ -24,77 +24,39 @@ public class OrderController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest) {
+    @PostMapping(consumes = "application/json", produces = "application/json", headers = "accessToken")
+    public ResponseEntity<GeneralResponse<OrderResponse>> createOrder(
+            @RequestBody OrderRequest orderRequest, @RequestHeader String accessToken) {
 
-        if (validateCreateOrderRequest(orderRequest))
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-        GeneralResponse<?> generalResponse = restTemplate.exchange(
-                "http://localhost:8080/api/v1/users/"+orderRequest.getUserId(),
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<GeneralResponse<UserResponse>>() {}).getBody();
-        UserResponse userResponse = (UserResponse) generalResponse.getBody();
-
-        OrderResponse orderRes = orderService.createOrder(orderRequest);
-        orderRes.setUserId(userResponse.getId());
-        orderRes.setUsername(userResponse.getUsername());
-
-        return new ResponseEntity<>(orderRes, HttpStatus.OK);
+        GeneralResponse<OrderResponse> orderGeneralRes = orderService.createOrder(orderRequest, accessToken);
+        return new ResponseEntity<>(orderGeneralRes, HttpStatus.resolve(orderGeneralRes.getStatus()));
     }
 
-    private boolean validateCreateOrderRequest(OrderRequest orderRequest) {
-        return orderRequest.getUserId() == null || orderRequest.getProductId() == null;
+    @GetMapping(produces = "application/json", headers = {"accessToken"})
+    public ResponseEntity<GeneralResponse<List<OrderResponse>>> getOrders(@RequestHeader String accessToken) {
+        GeneralResponse<List<OrderResponse>> response = orderService.fetchAllOrders(accessToken);
+        return new ResponseEntity<>(response, HttpStatus.resolve(response.getStatus()));
     }
 
-    @GetMapping(produces = "application/json")
-    public ResponseEntity<List<OrderResponse>> getOrders() {
-        List<OrderResponse> response = orderService.fetchAllOrders();
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+    @GetMapping(produces = "application/json", path = "/{id}", headers = {"userId", "accessToken"})
+    public ResponseEntity<GeneralResponse<OrderResponse>> getOrder(@PathVariable Long id,
+          @RequestHeader Long userId, @RequestHeader String accessToken) {
 
-    @GetMapping(produces = "application/json", path = "/{id}", headers = "userId")
-    public ResponseEntity<OrderResponse> getOrder(@PathVariable Long id, @RequestHeader Long userId) {
-
-        if (id == null || userId == null) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-
-        OrderResponse orderResponse = orderService.fetchOrder(id, userId);
-
-        if (orderResponse == null)
-            return new ResponseEntity<>(null, HttpStatus.OK);
-
-        GeneralResponse<UserResponse> generalResponse = restTemplate.exchange(
-                "http://localhost:8080/api/v1/users/" + userId,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<GeneralResponse<UserResponse>>() {}).getBody();
-
-        if (generalResponse.getBody() != null) {
-            orderResponse.setUserId(generalResponse.getBody().getId());
-            orderResponse.setUsername(generalResponse.getBody().getUsername());
-        }
+        GeneralResponse<OrderResponse> orderResponse = orderService.fetchOrder(id, userId, accessToken);
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
 
     @DeleteMapping(produces = "application/json", path = "/{orderId}")
-    public ResponseEntity<OrderResponse> cancelOrder(@PathVariable Long orderId) {
-        boolean response = orderService.cancelOrder(orderId);
-        if (response)
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        else
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<GeneralResponse> cancelOrder(@PathVariable Long orderId, @RequestHeader String accessToken) {
+        GeneralResponse response = orderService.cancelOrder(orderId, accessToken);
+        return new ResponseEntity<>(response, HttpStatus.resolve(response.getStatus()));
     }
 
-    @GetMapping(produces = "application/json", params = "productId")
-    public ResponseEntity<GeneralResponse<Order>> searchProductFromOrders(@RequestParam String productName) {
-        GeneralResponse<ProductResponse> generalResponse = restTemplate.getForObject(
-                "http://localhost:8082/api/v1/products?productName="+ productName,
-                GeneralResponse.class);
-        GeneralResponse response = orderService.searchProductFromOrders(
-                generalResponse.getBody().getId());
+    @GetMapping(produces = "application/json", params = "productId", headers = "accessToken")
+    public ResponseEntity<GeneralResponse<OrderResponse>> searchProductFromOrders(
+            @RequestParam String productName, @RequestHeader String accessToken) {
+
+        GeneralResponse response = orderService.searchProductFromOrders(productName, accessToken);
         return new ResponseEntity<>(response, HttpStatus.resolve(response.getStatus()));
     }
 }

@@ -1,0 +1,1787 @@
+{
+	"info": {
+		"_postman_id": "f42de5d7-a67e-40c3-ad18-ea51dd93b8e0",
+		"name": "Online Business MicroServices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/v1/orders/",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						""
+					]
+				},
+				"description": "Get orders of order microservice for ABC company online businees"
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				},
+				"description": "Save ABC companies customers before purchase"
+			},
+			"response": [
+				{
+					"name": "Get single users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users?userId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 15:58:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"email\": \"pickup@mail.com\",\n        \"username\": \"Olia\",\n        \"dob\": \"2021-02-12\",\n        \"nic\": \"904034404\"\n    },\n    {\n        \"id\": 2,\n        \"email\": \"nick@mail.com\",\n        \"username\": \"Nick_o\",\n        \"dob\": \"1999-02-12\",\n        \"nic\": \"5545455555\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				},
+				"description": "Get all customers of ABC company"
+			},
+			"response": [
+				{
+					"name": "Create users",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 15:54:42 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 201,\n    \"message\": \"Successfully created new user\",\n    \"body\": {\n        \"id\": 2,\n        \"email\": \"nick@mail.com\",\n        \"username\": \"Nick_o\",\n        \"dob\": \"1999-02-12\",\n        \"nic\": \"5545455555\"\n    }\n}"
+				},
+				{
+					"name": "Get users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 15:56:28 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"email\": \"pickup@mail.com\",\n        \"username\": \"Olia\",\n        \"dob\": \"2021-02-12\",\n        \"nic\": \"904034404\"\n    },\n    {\n        \"id\": 2,\n        \"email\": \"nick@mail.com\",\n        \"username\": \"Nick_o\",\n        \"dob\": \"1999-02-12\",\n        \"nic\": \"5545455555\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get single users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/users/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get single users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users?userId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 15:58:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"email\": \"pickup@mail.com\",\n        \"username\": \"Olia\",\n        \"dob\": \"2021-02-12\",\n        \"nic\": \"904034404\"\n    },\n    {\n        \"id\": 2,\n        \"email\": \"nick@mail.com\",\n        \"username\": \"Nick_o\",\n        \"dob\": \"1999-02-12\",\n        \"nic\": \"5545455555\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Delete single users",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/users?userId=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get single users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users?userId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 16:03:07 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": null,\n    \"body\": {\n        \"id\": 2,\n        \"email\": \"nick@mail.com\",\n        \"username\": \"Nick_o\",\n        \"dob\": \"1999-02-12\",\n        \"nic\": \"5545455555\"\n    }\n}"
+				},
+				{
+					"name": "Delete single users",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nick@mail.com\",\r\n    \"username\": \"Nick_o\",\r\n    \"password\": \"03492\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users?userId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 15:59:16 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Save order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"takeawy\",\r\n    \"productId\": 1,\r\n    \"userId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/api/v1/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Save order",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"takeawy\",\r\n    \"productId\": 1,\r\n    \"userId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/v1/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 17:14:52 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"date\": \"Wed May 12 22:44:51 IST 2021\",\n    \"status\": \"Pending\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"nic\": \"93249023\",\r\n    \"password\": \"123456\",\r\n    \"username\": \"blasanka\",\r\n    \"dob\": \"2001-10-11\",\r\n    \"email\": \"blasank@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/users/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update order",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"Dinein\",\r\n    \"productId\": 1,\r\n    \"userId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"2"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 23:58:41 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 201,\n    \"message\": \"Successfully updated user\",\n    \"body\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Search product by order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/v1/orders?productName=\"asa\"",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "productName",
+							"value": "\"asa\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single order",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "userId",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8081/api/v1/orders/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"10"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get single order",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8081/api/v1/orders/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"10"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 13 May 2021 02:59:54 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 10,\n    \"date\": \"Thu May 13 08:06:02 IST 2021\",\n    \"status\": \"Pending\",\n    \"userId\": 2,\n    \"productId\": 1,\n    \"username\": \"blasanka\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Cancel single order",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/v1/orders/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorize for resource",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"blasanka@mail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8083/api/v1/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Login to make purchases and for other resource access"
+			},
+			"response": [
+				{
+					"name": "Login - Failed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"blasank@gmail.com\",\r\n    \"password\": \"12346\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8083/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 03:05:00 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 401,\n    \"message\": \"User does not exists, please try again!\",\n    \"body\": null\n}"
+				},
+				{
+					"name": "Login - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"blasank@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8083/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 03:04:34 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": \"User authenticated successfully!\",\n    \"body\": {\n        \"userId\": 2,\n        \"username\": \"blasanka\",\n        \"email\": \"blasank@gmail.com\",\n        \"accessToken\": \"1111.1111.1111\",\n        \"refreshToken\": \"1111.1111.2222\",\n        \"createdAt\": \"Fri May 14 08:34:34 IST 2021\",\n        \"status\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"blasanka@mail.com\",\r\n    \"username\": \"Blasanka\",\r\n    \"password\": \"123456\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8083/api/v1/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				},
+				"description": "Register new customer in ABC company database"
+			},
+			"response": [
+				{
+					"name": "Register - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"blasanka@mail.com\",\r\n    \"username\": \"Blasanka\",\r\n    \"password\": \"123456\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8083/api/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 05:58:50 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 201,\n    \"message\": \"User sing up successful!\",\n    \"body\": {\n        \"id\": 4,\n        \"email\": \"blasanka@mail.com\",\n        \"username\": \"Blasanka\",\n        \"dob\": \"1999-02-12\",\n        \"nic\": \"5545455555\"\n    }\n}"
+				},
+				{
+					"name": "Register - user exists",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"blasanka@mail.com\",\r\n    \"username\": \"Blasanka\",\r\n    \"password\": \"123456\",\r\n    \"dob\": \"1999-02-12\",\r\n    \"nic\": \"5545455555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8083/api/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 05:59:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 400,\n    \"message\": \"{\\\"status\\\":400,\\\"message\\\":\\\"could not execute statement; SQL [n/a]; constraint [UK_ob8kqyqqgmefl0aco34akdtpe]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement\\\",\\\"body\\\":null}\",\n    \"body\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "Bearer 1111.1111.11111",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6,\r\n    \"orderPrice\": 200.0,\r\n    \"shippingCharge\": 3.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/v1/payments",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"payments"
+					]
+				},
+				"description": "Make payment for the order made. This will record the user details with order details for payment history reference"
+			},
+			"response": [
+				{
+					"name": "Payment - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6,\r\n    \"orderPrice\": 200.0,\r\n    \"shippingCharge\": 3.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/payments",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 12:22:30 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": \"Successfully paid Rs. 203.0, your order will arrive soon. Thank you! ~ ABC company\",\n    \"body\": {\n        \"id\": 1,\n        \"paymentReference\": \"pasfksokfffff--adsdd\",\n        \"paymentMadeAt\": \"Fri May 14 17:52:30 IST 2021\",\n        \"totalPrice\": 203,\n        \"userId\": 2,\n        \"orderId\": 6\n    }\n}"
+				},
+				{
+					"name": "Payment - Failed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6,\r\n    \"orderPrice\": 200.0,\r\n    \"shippingPrice\": 3.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/payments",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 08:41:39 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 401,\n    \"message\": \"Unauthorized! Failed to proceed with payment.\",\n    \"body\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Payment history by order id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "Bearer 1111.1111.11111",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/v1/payments/history",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"payments",
+						"history"
+					]
+				},
+				"description": "All the payments made by a user"
+			},
+			"response": [
+				{
+					"name": "Payment history - Failed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6,\r\n    \"paymentRefference\": \"2323232ddd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/payments/history",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								"history"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 08:40:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 401,\n    \"message\": \"Unauthorized, failed to process request\",\n    \"body\": null\n}"
+				},
+				{
+					"name": "Payment history - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/payments/history",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								"history"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 12:37:45 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": null,\n    \"body\": [\n        {\n            \"id\": 1,\n            \"paymentReference\": \"pasfksokfffff--adsdd\",\n            \"paymentMadeAt\": \"Fri May 14 17:52:30 IST 2021\",\n            \"totalPrice\": 203,\n            \"userId\": 2,\n            \"orderId\": 6\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Payment history by user id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "Bearer 1111.1111.11111",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/v1/payments/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"payments",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Payment history by user id - Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/payments/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 12:55:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": null,\n    \"body\": [\n        {\n            \"id\": 1,\n            \"paymentReference\": \"pasfksokfffff--adsdd\",\n            \"paymentMadeAt\": \"Fri May 14 17:52:30 IST 2021\",\n            \"totalPrice\": 203,\n            \"userId\": 2,\n            \"orderId\": 6\n        },\n        {\n            \"id\": 2,\n            \"paymentReference\": \"pasfksokfffff--adsdd\",\n            \"paymentMadeAt\": \"Fri May 14 18:15:05 IST 2021\",\n            \"totalPrice\": 122,\n            \"userId\": 2,\n            \"orderId\": 3\n        }\n    ]\n}"
+				},
+				{
+					"name": "Payment history by user id - Failed",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"orderId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/payments/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								"2"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 12:56:26 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2021-05-14T12:56:26.102+00:00\",\n    \"status\": 404,\n    \"error\": \"Not Found\",\n    \"message\": \"\",\n    \"path\": \"/api/v1/payments/2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Authorize for resource",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "Bearer 1111.1111.11111",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8083/api/v1/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"auth"
+					]
+				},
+				"description": "This is for only microservices communication to authorize all other authentication required microservices"
+			},
+			"response": [
+				{
+					"name": "Authorize for resource -  Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8083/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 13:32:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Authorize for resource - no accessToken header",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8083/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 13:32:37 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2021-05-14T13:32:37.348+00:00\",\n    \"status\": 404,\n    \"error\": \"Not Found\",\n    \"message\": \"\",\n    \"path\": \"/api/v1/auth\"\n}"
+				},
+				{
+					"name": "Authorize for resource - Failed, Wrong token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8083/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 May 2021 13:33:40 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
