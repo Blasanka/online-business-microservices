@@ -25,4 +25,4 @@ to create but tables will create automatically.
 
 - Find the database backups in root directory.
 - There is a postman collection provided for testing
-  all routes in four microservices.
+  all routes of four microservices.

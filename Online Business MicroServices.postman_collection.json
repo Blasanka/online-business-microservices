@@ -9,7 +9,13 @@
 			"name": "orders",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "Bearer 1111.1111.11111",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:8081/api/v1/orders/",
 					"host": [
@@ -25,7 +31,61 @@
 				},
 				"description": "Get orders of order microservice for ABC company online businees"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "orders",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8081/api/v1/orders/",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 May 2021 05:34:39 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"message\": null,\n    \"body\": [\n        {\n            \"id\": 2,\n            \"date\": \"Wed May 12 09:40:41 IST 2021\",\n            \"status\": \"Pending\",\n            \"userId\": 2,\n            \"productId\": 1,\n            \"username\": null\n        },\n        {\n            \"id\": 3,\n            \"date\": \"Wed May 12 22:44:51 IST 2021\",\n            \"status\": \"Pending\",\n            \"userId\": 1,\n            \"productId\": 1,\n            \"username\": null\n        },\n        {\n            \"id\": 4,\n            \"date\": \"Thu May 13 07:26:55 IST 2021\",\n            \"status\": \"Pending\",\n            \"userId\": null,\n            \"productId\": 1,\n            \"username\": null\n        },\n        {\n            \"id\": 8,\n            \"date\": \"Thu May 13 07:32:36 IST 2021\",\n            \"status\": \"Pending\",\n            \"userId\": null,\n            \"productId\": 1,\n            \"username\": null\n        },\n        {\n            \"id\": 9,\n            \"date\": \"Thu May 13 08:04:45 IST 2021\",\n            \"status\": \"Pending\",\n            \"userId\": 2,\n            \"productId\": 1,\n            \"username\": null\n        },\n        {\n            \"id\": 10,\n            \"date\": \"Thu May 13 08:06:02 IST 2021\",\n            \"status\": \"Pending\",\n            \"userId\": 2,\n            \"productId\": 1,\n            \"username\": null\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "register",
@@ -495,10 +555,16 @@
 			"name": "Save order",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "Bearer 1111.1111.11111",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"type\": \"takeawy\",\r\n    \"productId\": 1,\r\n    \"userId\": 2\r\n}",
+					"raw": "{\r\n    \"type\": \"takeaway\",\r\n    \"productId\": 1,\r\n    \"userId\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -520,13 +586,76 @@
 			},
 			"response": [
 				{
-					"name": "Save order",
+					"name": "Save order - failure",
 					"originalRequest": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"type\": \"takeawy\",\r\n    \"productId\": 1,\r\n    \"userId\": 2\r\n}",
+							"raw": "{\r\n    \"type\": \"takeaway\",\r\n    \"productId\": 1,\r\n    \"userId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/v1/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 May 2021 06:00:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 400,\n    \"message\": \"User does not exists!\",\n    \"body\": null\n}"
+				},
+				{
+					"name": "Save order - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"takeaway\",\r\n    \"productId\": 1,\r\n    \"userId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -560,7 +689,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Wed, 12 May 2021 17:14:52 GMT"
+							"value": "Sat, 15 May 2021 06:01:34 GMT"
 						},
 						{
 							"key": "Keep-Alive",
@@ -572,7 +701,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"id\": 3,\n    \"date\": \"Wed May 12 22:44:51 IST 2021\",\n    \"status\": \"Pending\"\n}"
+					"body": "{\n    \"status\": 200,\n    \"message\": \"Order placed successful, proceed with payment\",\n    \"body\": {\n        \"id\": 11,\n        \"date\": \"Sat May 15 11:31:31 IST 2021\",\n        \"status\": \"Pending\",\n        \"userId\": 1,\n        \"productId\": null,\n        \"username\": \"Nick_o\"\n    }\n}"
 				}
 			]
 		},
@@ -774,9 +903,15 @@
 			"name": "Cancel single order",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "Bearer 1111.1111.11111",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8081/api/v1/orders/5",
+					"raw": "localhost:8081/api/v1/orders/9",
 					"host": [
 						"localhost"
 					],
@@ -785,11 +920,111 @@
 						"api",
 						"v1",
 						"orders",
-						"5"
+						"9"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Cancel single order",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8081/api/v1/orders/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"10"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 May 2021 06:12:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Cancel single order - Failed without accessToken",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "Bearer 1111.1111.11111",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8081/api/v1/orders/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"10"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 May 2021 06:12:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2021-05-15T06:12:30.310+00:00\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"message\": \"\",\n    \"path\": \"/api/v1/orders/10\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Authorize for resource",
