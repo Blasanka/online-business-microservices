@@ -1,8 +1,14 @@
 package com.sliit.mtit.AuthService.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "This is the request body of login and register")
 public class LoginRequest {
 
+    @ApiModelProperty(notes = "Registered user email")
     private String email;
+    @ApiModelProperty(notes = "Registered user password")
     private String password;
 
     public LoginRequest() {

@@ -24,7 +24,7 @@ public class AuthServiceApplication {
 	public Docket swaggerConfiguration() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.ant("http://localhost:8082/api/v1/auth/*"))
+				.paths(PathSelectors.ant("/auth/*"))
 				.apis(RequestHandlerSelectors.basePackage("com.sliit.mtit"))
 				.build()
 				.apiInfo(getApiInfo());

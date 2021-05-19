@@ -1,9 +1,16 @@
 package com.sliit.mtit.AuthService.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Common response for all requests that includes status code and message")
 public class GeneralResponse<T> {
 
+    @ApiModelProperty(notes = "Status code of response")
     private Integer status;
+    @ApiModelProperty(notes = "Message that described error, or success")
     private String message;
+    @ApiModelProperty(notes = "Particular url segment response body")
     private T body;
 
     public GeneralResponse() {

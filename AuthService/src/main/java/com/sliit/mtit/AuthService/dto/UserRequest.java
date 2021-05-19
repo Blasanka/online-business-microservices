@@ -1,5 +1,8 @@
 package com.sliit.mtit.AuthService.dto;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(description = "This is the request body of user microservice communication")
 public class UserRequest {
 
     private String email;

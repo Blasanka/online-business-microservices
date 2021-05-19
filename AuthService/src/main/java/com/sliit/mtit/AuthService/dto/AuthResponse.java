@@ -1,13 +1,19 @@
 package com.sliit.mtit.AuthService.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Successful registration & login response")
 public class AuthResponse {
 
+    @ApiModelProperty(notes = "Registered or logged in user id")
     private Long userId;
     private String username;
     private String email;
     private String accessToken;
     private String refreshToken;
     private String createdAt;
+    @ApiModelProperty(value = "1 and 0",notes = "Registered user is verified or not")
     private Integer status;
 
     public AuthResponse() {

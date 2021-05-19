@@ -24,7 +24,7 @@ public class PaymentServiceApplication {
 	public Docket swaggerConfiguration() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.ant("http://localhost:8082/api/v1/payments/*"))
+				.paths(PathSelectors.ant("/payments/*"))
 				.apis(RequestHandlerSelectors.basePackage("com.sliit.mtit"))
 				.build()
 				.apiInfo(getApiInfo());

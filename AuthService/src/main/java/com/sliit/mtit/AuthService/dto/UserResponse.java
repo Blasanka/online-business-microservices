@@ -1,7 +1,12 @@
 package com.sliit.mtit.AuthService.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "This is the response of user microservice communication returns")
 public class UserResponse {
 
+    @ApiModelProperty(notes = "Registered user id")
     private Long id;
     private String email;
     private String username;

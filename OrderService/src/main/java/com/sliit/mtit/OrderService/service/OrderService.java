@@ -165,8 +165,9 @@ public class OrderService {
         if (!checkAuthorization(accessToken))
             return getUnAuthorizedResponse("Unauthorized! cannot proceed");
 
+        // This is not implemented by the other member when this is implementing
         GeneralResponse<ProductResponse> generalResponse = restTemplate.getForObject(
-                "http://localhost:8082/api/v1/products?productName="+ productName,
+                "http://localhost:8087/api/v1/products?productName="+ productName,
                 GeneralResponse.class);
 
         Optional<Order> order = oderRepository.findById(generalResponse.getBody().getId());
