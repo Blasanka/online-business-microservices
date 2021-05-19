@@ -71,7 +71,6 @@ public class PaymentController {
     public ResponseEntity<GeneralResponse<PaymentResponse>> checkPaymentHistory(
             @RequestBody CheckPaymentRequest checkPaymentRequest, @RequestHeader String accessToken) {
 
-
         GeneralResponse<PaymentResponse> generalResponse = paymentService.checkPaymentHistory(
                 checkPaymentRequest, accessToken);
 

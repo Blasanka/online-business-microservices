@@ -24,7 +24,7 @@ public class OrderServiceApplication {
 	public Docket swaggerConfiguration() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.ant("http://localhost:8081/api/v1/orders/*"))
+				.paths(PathSelectors.ant("/orders/*"))
 				.apis(RequestHandlerSelectors.basePackage("com.sliit.mtit"))
 				.build()
 				.apiInfo(getApiInfo());
